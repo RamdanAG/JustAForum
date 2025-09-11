@@ -1,0 +1,11 @@
+[
+    {
+      "id": 1,
+      "author": { "username": "ryu_dev", "name": "Ryu", "avatar": "/avatars/ryu.png" },
+      "content": "Hari ini aku lagi coba bikin forum kayak Facebook tapi versi baru 🚀",
+      "image": "/images/post1.jpg",
+      "created_at": "2025-09-10T10:15:00Z",
+      "stats": { "likes": 25, "comments": 4, "reposts": 2, "quotes": 1, "saves": 5, "shares": 3 }
+    }
+  ]
+  
