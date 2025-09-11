@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NewPost from "../../components/post/NewPost";
+import "../../styles/pages/explore-feed.css";
 
 const dummyPosts = [
   {
@@ -66,12 +67,12 @@ export default function ExploreFeed() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="explore-feed-page">
       {/* Main Content */}
-      <div className="w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-3">
+      <div className="explore-feed-container">
+        <div className="explore-feed-grid">
           {/* Feed Utama */}
-          <div className="lg:col-span-2">
+          <div className="explore-feed-main">
             {/* Create Post */}
             <NewPost />
 
@@ -79,29 +80,29 @@ export default function ExploreFeed() {
             {posts.map(post => (
               <div
                 key={post.id}
-                className="bg-white rounded-lg shadow-sm overflow-hidden"
+                className="post-card"
               >
                 {/* Post Header */}
-                <div className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
+                <div className="post-header">
+                  <div className="post-header-content">
+                    <div className="post-author-info">
                       <img
                         src={post.author.avatar}
                         alt={post.author.name}
-                        className="w-10 h-10 rounded-full"
+                        className="post-author-avatar"
                       />
-                      <div>
-                        <div className="font-semibold text-gray-900">{post.author.name}</div>
-                        <div className="text-sm text-gray-500">
+                      <div className="post-author-details">
+                        <div className="post-author-name">{post.author.name}</div>
+                        <div className="post-meta">
                           {formatTimeAgo(post.created_at)} • 
-                          <svg className="w-4 h-4 inline ml-1" fill="currentColor" viewBox="0 0 24 24">
+                          <svg className="post-meta-icon" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                           </svg>
                         </div>
                       </div>
                     </div>
-                    <button className="p-1 hover:bg-gray-100 rounded-full">
-                      <svg className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                    <button className="post-menu-btn">
+                      <svg className="post-menu-icon" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
                       </svg>
                     </button>
@@ -109,37 +110,37 @@ export default function ExploreFeed() {
                 </div>
 
                 {/* Post Content */}
-                <div className="px-4 pb-3">
-                  <p className="text-gray-900 leading-relaxed">{post.content}</p>
+                <div className="post-content">
+                  <p className="post-text">{post.content}</p>
                 </div>
 
                 {/* Images */}
                 {post.images && post.images.length > 0 && (
-                  <div className="relative">
+                  <div className="post-images">
                     {post.images.length === 1 ? (
                       <img
                         src={post.images[0]}
                         alt="post"
-                        className="w-full max-h-96 object-cover cursor-pointer"
+                        className="post-image-single"
                         onClick={() => navigate(`/post/${post.id}`)}
                       />
                     ) : (
-                      <div className="grid grid-cols-2 gap-1">
+                      <div className="post-images-grid">
                         {post.images.slice(0, 6).map((img, i) => (
-                          <div key={i} className="relative">
+                          <div key={i} className="post-image-item">
                             <img
                               src={img}
                               alt="post"
-                              className="w-full h-48 object-cover cursor-pointer"
+                              className="post-image"
                               onClick={() => navigate(`/post/${post.id}`)}
                             />
                             {/* Show +X overlay for the 6th image if there are more than 6 images */}
                             {i === 5 && post.images.length > 6 && (
                               <div 
-                                className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center cursor-pointer"
+                                className="post-image-overlay"
                                 onClick={() => navigate(`/post/${post.id}`)}
                               >
-                                <span className="text-white text-2xl font-bold">
+                                <span className="post-image-overlay-text">
                                   +{post.images.length - 6}
                                 </span>
                               </div>
@@ -152,11 +153,11 @@ export default function ExploreFeed() {
                 )}
 
                 {/* Post Stats */}
-                <div className="px-4 py-2 border-t border-gray-100">
-                  <div className="flex items-center justify-between text-sm text-gray-600">
-                    <div className="flex items-center space-x-4">
-                      <span className="flex items-center space-x-1">
-                        <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                <div className="post-stats">
+                  <div className="post-stats-content">
+                    <div className="post-stats-left">
+                      <span className="post-stat-item">
+                        <svg className="post-stat-icon" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                         </svg>
                         <span>{post.stats.likes}</span>
@@ -168,22 +169,22 @@ export default function ExploreFeed() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="px-4 py-2 border-t border-gray-100">
-                  <div className="flex justify-around">
-                    <button className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 rounded-lg text-gray-600 font-medium">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <div className="post-actions">
+                  <div className="post-actions-container">
+                    <button className="post-action-btn">
+                      <svg className="post-action-icon" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                       </svg>
                       <span>Suka</span>
                     </button>
-                    <button className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 rounded-lg text-gray-600 font-medium">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <button className="post-action-btn">
+                      <svg className="post-action-icon" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
                       </svg>
                       <span>Komentar</span>
                     </button>
-                    <button className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 rounded-lg text-gray-600 font-medium">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <button className="post-action-btn">
+                      <svg className="post-action-icon" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
                       </svg>
                       <span>Share</span>

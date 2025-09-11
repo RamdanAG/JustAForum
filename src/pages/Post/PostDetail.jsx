@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "../../styles/pages/post-detail.css";
 
 export default function PostDetail() {
   const { id } = useParams();
@@ -63,43 +64,43 @@ export default function PostDetail() {
   if (!post) return <div>Loading...</div>;
 
   return (
-    <div className="max-w-xl mx-auto bg-white shadow rounded-2xl p-4">
+    <div className="post-detail-page">
       <button
         onClick={() => navigate(-1)}
-        className="text-blue-500 text-sm mb-3 hover:underline"
+        className="post-detail-back-btn"
       >
         ← Back
       </button>
 
-      <div className="flex items-center gap-3">
-        <img src={post.author.avatar} alt={post.author.name} className="w-12 h-12 rounded-full" />
-        <div>
-          <div className="font-semibold">{post.author.name}</div>
-          <div className="text-gray-500 text-sm">@{post.author.username}</div>
-          <div className="text-gray-400 text-xs">
+      <div className="post-detail-author">
+        <img src={post.author.avatar} alt={post.author.name} className="post-detail-author-avatar" />
+        <div className="post-detail-author-info">
+          <div className="post-detail-author-name">{post.author.name}</div>
+          <div className="post-detail-author-username">@{post.author.username}</div>
+          <div className="post-detail-timestamp">
             {new Date(post.created_at).toLocaleString()}
           </div>
         </div>
       </div>
 
-      <p className="mt-3 text-gray-800">{post.content}</p>
+      <p className="post-detail-content">{post.content}</p>
 
       {post.images && post.images.length > 0 && (
-        <div className="mt-3">
+        <div className="post-detail-images">
           {post.images.length === 1 ? (
             <img 
               src={post.images[0]} 
               alt="post" 
-              className="rounded-lg w-full max-h-96 object-cover" 
+              className="post-detail-image-single" 
             />
           ) : (
-            <div className="grid grid-cols-2 gap-2">
+            <div className="post-detail-images-grid">
               {post.images.map((img, i) => (
                 <img 
                   key={i} 
                   src={img} 
                   alt="post" 
-                  className="rounded-lg w-full h-48 object-cover" 
+                  className="post-detail-image" 
                 />
               ))}
             </div>
@@ -107,13 +108,13 @@ export default function PostDetail() {
         </div>
       )}
 
-      <div className="flex justify-around mt-4 text-gray-600 text-sm">
-        <button className="hover:text-blue-500">👍 {post.stats.likes}</button>
-        <button className="hover:text-blue-500">💬 {post.stats.comments}</button>
-        <button className="hover:text-blue-500">🔄 {post.stats.reposts}</button>
-        <button className="hover:text-blue-500">📝 {post.stats.quotes}</button>
-        <button className="hover:text-blue-500">💾 {post.stats.saves}</button>
-        <button className="hover:text-blue-500">📤 {post.stats.shares}</button>
+      <div className="post-detail-stats">
+        <button className="post-detail-stat-btn">👍 {post.stats.likes}</button>
+        <button className="post-detail-stat-btn">💬 {post.stats.comments}</button>
+        <button className="post-detail-stat-btn">🔄 {post.stats.reposts}</button>
+        <button className="post-detail-stat-btn">📝 {post.stats.quotes}</button>
+        <button className="post-detail-stat-btn">💾 {post.stats.saves}</button>
+        <button className="post-detail-stat-btn">📤 {post.stats.shares}</button>
       </div>
     </div>
   );

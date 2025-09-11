@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/pages/new-post-detail.css';
 
 const NewPostDetail = () => {
   const navigate = useNavigate();
@@ -25,39 +26,39 @@ const NewPostDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="w-full bg-white min-h-screen">
+    <div className="new-post-detail-page">
+      <div className="new-post-detail-container">
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+        <div className="new-post-detail-header">
           <button
             onClick={() => navigate(-1)}
-            className="text-blue-500 hover:text-blue-600"
+            className="new-post-detail-back-btn"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <h1 className="text-lg font-semibold">Buat Postingan</h1>
+          <h1 className="new-post-detail-title">Buat Postingan</h1>
           <button
             onClick={handleSubmit}
-            className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium hover:bg-blue-600"
+            className="new-post-detail-post-btn"
           >
             Posting
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-4">
+        <div className="new-post-detail-content">
           {/* User Info */}
-          <div className="flex items-center space-x-3 mb-4">
+          <div className="new-post-detail-user-info">
             <img
               src="https://i.pravatar.cc/40?img=3"
               alt="User"
-              className="w-10 h-10 rounded-full"
+              className="new-post-detail-user-avatar"
             />
             <div>
-              <div className="font-semibold">Nama User</div>
-              <div className="text-sm text-gray-500">Publik</div>
+              <div className="new-post-detail-user-name">Nama User</div>
+              <div className="new-post-detail-user-privacy">Publik</div>
             </div>
           </div>
 
@@ -66,20 +67,20 @@ const NewPostDetail = () => {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Apa yang Anda pikirkan?"
-            className="w-full min-h-32 p-3 border-none resize-none text-lg focus:outline-none"
+            className="new-post-detail-textarea"
             autoFocus
           />
 
           {/* Feeling/Activity */}
           {feeling && (
-            <div className="flex items-center space-x-2 mb-4">
-              <span className="text-sm text-gray-600">Merasa</span>
-              <span className="text-sm font-medium text-blue-600">{feeling}</span>
+            <div className="new-post-detail-feeling">
+              <span className="new-post-detail-feeling-text">Merasa</span>
+              <span className="new-post-detail-feeling-value">{feeling}</span>
               <button
                 onClick={() => setFeeling('')}
-                className="text-gray-400 hover:text-gray-600"
+                className="new-post-detail-feeling-remove"
               >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                 </svg>
               </button>
@@ -88,20 +89,20 @@ const NewPostDetail = () => {
 
           {/* Images Preview */}
           {images.length > 0 && (
-            <div className="mb-4">
-              <div className="grid grid-cols-2 gap-2">
+            <div className="new-post-detail-images-preview">
+              <div className="new-post-detail-images-grid">
                 {images.map((img, index) => (
-                  <div key={index} className="relative">
+                  <div key={index} className="new-post-detail-image-item">
                     <img
                       src={img}
                       alt={`Preview ${index + 1}`}
-                      className="w-full h-32 object-cover rounded-lg"
+                      className="new-post-detail-image-preview"
                     />
                     <button
                       onClick={() => removeImage(index)}
-                      className="absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full p-1 hover:bg-opacity-70"
+                      className="new-post-detail-image-remove"
                     >
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                       </svg>
                     </button>
@@ -112,10 +113,10 @@ const NewPostDetail = () => {
           )}
 
           {/* Action Buttons */}
-          <div className="border-t border-gray-200 pt-4">
-            <div className="flex justify-around">
-              <label className="flex items-center space-x-2 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg cursor-pointer">
-                <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+          <div className="new-post-detail-actions">
+            <div className="new-post-detail-actions-container">
+              <label className="new-post-detail-action-btn">
+                <svg className="new-post-detail-action-icon red" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                 </svg>
                 <span>Foto/Video</span>
@@ -124,14 +125,14 @@ const NewPostDetail = () => {
                   multiple
                   accept="image/*,video/*"
                   onChange={handleImageUpload}
-                  className="hidden"
+                  className="new-post-detail-file-input"
                 />
               </label>
               <button 
                 onClick={() => setFeeling('Senang')}
-                className="flex items-center space-x-2 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg"
+                className="new-post-detail-action-btn"
               >
-                <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="new-post-detail-action-icon green" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                 </svg>
                 <span>Perasaan/Aktivitas</span>
