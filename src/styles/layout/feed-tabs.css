@@ -1,0 +1,33 @@
+.feed-tabs-container {
+  /* Container utama untuk feed tabs */
+}
+
+.feed-tabs-navigation {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #374151;
+}
+
+.feed-tab-btn {
+  flex: 1;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.feed-tab-btn:hover {
+  background: #1f2937;
+}
+
+.feed-tab-btn.active {
+  font-weight: bold;
+  border-bottom: 2px solid #3b82f6;
+  color: white;
+}
+
+.feed-tabs-content {
+  /* Container untuk konten tab */
+}

@@ -1,39 +1,25 @@
-import { useState } from "react";
-import ExploreFeed from "./Feed/ExploreFeed";
-import FollowingFeed from "./Feed/FollowingFeed";
-import ForumList from "./Group/ForumList";
+import Sidebar from "../components/layout/Sidebar";
+import RightSidebar from "../components/layout/RightSidebar";
+import FeedTabs from "../components/layout/FeedTabs";
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState("explore");
-
   return (
-    <div>
-      {/* Navbar Tabs */}
-      <div style={{ display: "flex", gap: "20px", borderBottom: "1px solid #ddd", marginBottom: "20px" }}>
-        <button 
-          onClick={() => setActiveTab("explore")}
-          style={{ fontWeight: activeTab === "explore" ? "bold" : "normal" }}
-        >
-          Explore
-        </button>
-        <button 
-          onClick={() => setActiveTab("following")}
-          style={{ fontWeight: activeTab === "following" ? "bold" : "normal" }}
-        >
-          Following
-        </button>
-        <button 
-          onClick={() => setActiveTab("forum")}
-          style={{ fontWeight: activeTab === "forum" ? "bold" : "normal" }}
-        >
-          Forum/Grup
-        </button>
+    <div className="flex max-w-7xl mx-auto">
+      {/* Sidebar kiri */}
+      <div className="w-1/5  min-h-screen p-4">
+        <Sidebar />
       </div>
 
-      {/* Content Switch */}
-      {activeTab === "explore" && <ExploreFeed />}
-      {activeTab === "following" && <FollowingFeed />}
-      {activeTab === "forum" && <ForumList />}
+      {/* Konten utama */}
+      <div className="w-3/5  min-h-screen">
+        
+        <FeedTabs />
+      </div>
+
+      {/* Sidebar kanan */}
+      <div className="w-1/5 p-4 hidden lg:block">
+        <RightSidebar />
+      </div>
     </div>
   );
 }
