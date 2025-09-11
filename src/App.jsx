@@ -6,6 +6,7 @@ import Home from "./pages/Home";   // ganti ini
 import UserProfile from "./pages/User/UserProfile";
 import GroupDetail from "./pages/Group/GroupDetail";
 import PostDetail from "./pages/Post/PostDetail";
+import NewPostDetail from "./pages/Post/NewPostDetail";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/user/:username" element={<UserProfile />} />
           <Route path="/group/:slug" element={<GroupDetail />} />
           <Route path="/post/:id" element={<PostDetail />} />
+          <Route path="/new-post" element={<NewPostDetail />} />
         </Route>
       </Routes>
     </Router>
